@@ -9,10 +9,10 @@
 <?php
 require_once("questions.php");
 
-foreach($questions as $qkey => $qval) {
-  echo "<h2>".$qval["text"]."</h2>";
-  foreach($qval["answers"] as $akey => $aval) {
-    echo "<input type='radio' name='".$qkey."' value='".$akey."'> ".$aval["text"]."<br>";
+foreach($questions as $questionid => $question) {
+  echo "<h2>".$question["text"]."</h2>";
+  foreach($question["answers"] as $answerid => $answer) {
+    echo "<input type='radio' name='".$questionid."' value='".$answerid."'> ".$answer["text"]."<br>";
   }
 }
 
