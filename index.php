@@ -15,7 +15,6 @@ foreach($questions as $questionid => $question) {
     echo "<input type='radio' name='".$questionid."' value='".$answerid."'> ".$answer["text"]."<br>";
   }
 }
-
 ?>
 
 <br>
