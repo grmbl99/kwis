@@ -1,25 +1,23 @@
+<?php 
+session_start();
+unset ($_SESSION['username']);
+?>
+
 <!DOCTYPE html>
 <html>
 <body>
 
-<h1>Vragenlijst</h1>
+<h1>Login</h1>
 
-<form action="showanswers.php" method="post">
+<form action="showquestions.php" method="post">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username"><br>
 
-<?php
-require_once("questions.php");
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password"><br>
 
-foreach($questions as $questionid => $question) {
-  echo "<h2>".$question["text"]."</h2>";
-  foreach($question["answers"] as $answerid => $answer) {
-    echo "<input type='radio' name='".$questionid."' value='".$answerid."'> ".$answer["text"]."<br>";
-  }
-}
-?>
-
-<br>
-<input type="submit" value="Submit">
+  <input type="submit" value="Submit">
 </form>
+
 </body>
 </html>
-

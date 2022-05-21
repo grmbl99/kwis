@@ -1,4 +1,4 @@
-INSERT INTO MyGuests (firstname, lastname) VALUES ("Daan", "van der Munnik");
-INSERT INTO MyGuests (firstname, lastname) VALUES ("Jan", "Jansen");
-INSERT INTO MyGuests (firstname, lastname) VALUES ("Puk", "van de Petteflat");
-INSERT INTO MyGuests (firstname, lastname) VALUES ("Jan", "met de korte Achternaam");
+INSERT INTO leden (username, password) VALUES ("daan", "test123!");
+INSERT INTO leden (username, password) VALUES ("jan", "test456!");
+INSERT INTO leden (username, password) VALUES ("puk", "test789!");
+INSERT INTO leden (username, password) VALUES ("klaas", "test012!");
