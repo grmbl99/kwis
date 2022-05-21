@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:  
+  database:
+    image: arm64v8/mysql:oracle
+    restart: always
+    user: mysql
+    ports:
+      - 3306:3306
+      - 33060:33060
+    environment:
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test123!
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ./database/db:/var/lib/mysql
+
+  website:
+    build: database/.
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./website:/var/www/html/
