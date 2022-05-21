@@ -2,18 +2,70 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
 <body>
 
 <h1>Vragenlijst</h1>
 
 <?php
 require_once("database.php");
+
+function tablerow($row, $isheader) {
+  echo "<tr>";
+  foreach ($row as $key => $value) {
+    if ($isheader) { 
+      echo "<th>$key</th>"; } 
+    else {
+      echo "<td>$value</td>";
+    }
+  }
+  echo "</tr>";
+}
+
 if (isset($_POST["username"]) && isset($_POST["password"])) {
   $username = $_POST["username"];
   $password = $_POST["password"];
   if (authenticate($username, $password)) {
     echo "<p>Welkom, $username!</p>";
     $_SESSION["username"] = $username;
+
+    $conn = dbconnect();
+
+    if (!$conn->connect_error) {
+      $sql = "SELECT * FROM leden";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+        echo "<table>";
+        $rownr = 0;
+        while($row = $result->fetch_assoc()) {
+          if ($rownr++ == 0) {
+            tablerow($row, isheader: true);
+          }
+          tablerow($row, isheader: false);
+        }
+        echo "</table>";
+      }
+      $conn->close();      
+    }
     ?>
     
     <form action="showanswers.php" method="post">
