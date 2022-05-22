@@ -2,7 +2,7 @@
 function dbconnect() {
   $servername = "database";
   $dbuser = "test_user";
-  $dbpasswd = "test123!";
+  $dbpasswd = rtrim(file_get_contents("/run/secrets/db_password"));
   $dbname = "testdb";
 
   $conn = new mysqli($servername, $dbuser, $dbpasswd, $dbname);

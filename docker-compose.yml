@@ -11,8 +11,10 @@ services:
     environment:
       MYSQL_DATABASE: testdb
       MYSQL_USER: test_user
-      MYSQL_PASSWORD: test123!
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    secrets:
+      - db_password
     volumes:
       - ./database/db:/var/lib/mysql
 
@@ -21,5 +23,11 @@ services:
     ports:
       - 80:80
       - 443:443
+    secrets:
+      - db_password
     volumes:
       - ./website/html:/var/www/html/
+
+secrets:
+  db_password:
+    file: ./MYSQL_DB_PASSWORD
