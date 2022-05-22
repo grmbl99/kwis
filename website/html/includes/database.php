@@ -1,4 +1,5 @@
 <?php
+
 function dbconnect() {
   $servername = "database";
   $dbuser = "test_user";
@@ -26,4 +27,5 @@ function authenticate($username,$password) {
 
   return $authenticated;
 }
+
 ?>

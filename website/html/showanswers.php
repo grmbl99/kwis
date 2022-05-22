@@ -1,12 +1,16 @@
 <?php session_start(); ?>
   
+<!DOCTYPE html>
 <html>
+<head>
+<link rel="stylesheet" href="css/style.css">
+</head>
 <body>
 
 <h1>Overzicht</h1>
 
 <?php 
-require_once("questions.php");
+require_once("includes/questions.php");
 
 if (isset($_SESSION["username"])) {
   echo "<p>Welkom, ".$_SESSION["username"]."!</p>";
