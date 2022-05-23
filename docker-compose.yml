@@ -3,6 +3,7 @@ version: '3.1'
 services:  
   database:
     image: arm64v8/mysql:oracle
+    #image: mysql:oracle
     restart: always
     user: mysql
     ports:

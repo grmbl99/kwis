@@ -12,4 +12,22 @@ docker-compose pull
 docker-compose up
 ```
 
-Note: I'm using the `arm64v8/mysql:oracle` docker image to be able to run on my M1 MacBook Pro.
+Recreate the `testdb` database with:
+
+```zsh
+docker-compose exec -T database mysql -u test_user -ppassword testdb < database/testdb-dump.sql
+```
+
+## MySQL docker image
+
+I'm using the `arm64v8/mysql:oracle` docker image to be able to run on my M1 MacBook Pro.
+
+On Windows, use the `mysql:oracle` docker image instead.
+
+## How to dump the database
+
+Dump the `testdb` database with:
+
+```zsh
+docker-compose exec database mysqldump -u test_user -p testdb
+```
