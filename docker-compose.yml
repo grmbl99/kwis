@@ -1,6 +1,19 @@
 version: '3.1'
 
-services:  
+services:
+  mssqldb: 
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    ports:
+      - 6666:1433
+    environment:
+      ACCEPT_EULA: 1
+      MSSQL_SA_PASSWORD_FILE: /run/secrets/mssql_sa_password
+      MSSQL_PID: Developer
+    secrets:
+      - mssql_sa_password
+    volumes:
+      - ./database/mssqldb:/var/opt/mssql
+
   database:
     image: arm64v8/mysql:oracle
     #image: mysql:oracle
@@ -12,10 +25,10 @@ services:
     environment:
       MYSQL_DATABASE: testdb
       MYSQL_USER: test_user
-      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_db_password
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     secrets:
-      - db_password
+      - mysql_db_password
     volumes:
       - ./database/db:/var/lib/mysql
 
@@ -30,5 +43,7 @@ services:
       - ./website/html:/var/www/html/
 
 secrets:
-  db_password:
+  mysql_db_password:
     file: ./MYSQL_DB_PASSWORD
+  mssql_sa_password:
+    file: ./MSSQL_SA_PASSWORD
